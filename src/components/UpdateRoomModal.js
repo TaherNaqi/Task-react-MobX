@@ -1,23 +1,23 @@
 import { Modal, Button, InputGroup, Form } from "react-bootstrap";
 import React, { useState } from "react";
-
-export default function UpdateRoomModal(props) {
+import roomStore from "../roomStore";
+export default function UpdateRoomModal({ isOpen, closeModal, roomm }) {
   const [room, setRoom] = useState({
-    id: props.room.id,
-    title: props.room.title,
-    image: props.room.image,
-    description: props.room.description,
+    id: roomm.id,
+    title: roomm.title,
+    image: roomm.image,
+    description: roomm.description,
   });
   const handleChange = (event) => {
     setRoom({ ...room, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.updateRoom(room);
-    props.closeModal();
+    roomStore.updateRoom(room);
+    closeModal();
   };
   return (
-    <Modal centered show={props.isOpen} onHide={props.closeModal}>
+    <Modal centered show={isOpen} onHide={closeModal}>
       <Modal.Header closeButton>
         <Modal.Title>Update a room</Modal.Title>
       </Modal.Header>
