@@ -16,8 +16,10 @@ function ChatRoom(props) {
   const handleChange = (event) => {
     setMsg({ ...msg, [event.target.name]: event.target.value });
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     roomStore.createMsg(room, msg);
+    setMsg({ msg: "" });
   };
 
   return (
@@ -45,6 +47,7 @@ function ChatRoom(props) {
           <input
             type="text"
             name="msg"
+            value={msg.msg}
             onChange={handleChange}
             placeholder="Type a message here"
           />
