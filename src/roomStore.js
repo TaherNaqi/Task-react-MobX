@@ -70,10 +70,11 @@ class RoomStore {
         `https://coded-task-axios-be.herokuapp.com/rooms/msg/${room.id}`,
         msg
       );
+      room.messages.push(msg);
 
-      this.rooms.map((e) =>
-        e.id === room.id ? e.messages.push(response.data) : e
-      );
+      // for using id this.rooms.map((e) =>
+      //   e.id === room.id ? e.messages.push(response.data) : e
+      // );
     } catch (error) {
       console.log(error);
     }

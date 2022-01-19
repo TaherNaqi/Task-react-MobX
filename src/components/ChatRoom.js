@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import MessageItem from "./MessageItem";
 import roomStore from "../roomStore";
 import { observer } from "mobx-react";
-function ChatRoom(props) {
+function ChatRoom() {
   const roomSlug = useParams().roomSlug;
   const [msg, setMsg] = useState({ msg: "" });
   if (roomStore.loading) {
@@ -11,7 +11,7 @@ function ChatRoom(props) {
   }
   const room = roomStore.rooms.find((room) => room.slug === roomSlug);
   const messagesList = room.messages.map((msg) => {
-    return <MessageItem msg={msg.msg} />;
+    return <MessageItem msg={msg.msg} key={msg.id} />;
   });
   const handleChange = (event) => {
     setMsg({ ...msg, [event.target.name]: event.target.value });
